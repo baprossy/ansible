@@ -1,0 +1,38 @@
+---
+- name: installing packages on multiple Os
+  hosts: all
+  become: true
+  gather_facts: no
+  
+
+  tasks:
+  - name: installing httpd redhat
+    yum:
+      name: httpd
+      state: installed
+    when: ansible_os_familly ==  "RedHat"
+
+  - name: install httpd on ubuntu
+    apt: 
+      name: apache2
+      state: present
+    when: ansible_os_familly == "Debian"
+
+  - name: start apache services on ubuntu
+    service:
+      name: apache2
+      state: started
+
+    when: ansible_os_family == "Debian"
+
+  - name: starting httpd services
+    service:
+      name: httpd
+      state: started
+    when: ansible_os_family==  "Redhat"
+    
+  - copy:
+      src: /home/ansdmin/playbooks/index.html
+      dest: /var/www/html
+     
+

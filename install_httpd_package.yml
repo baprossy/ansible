@@ -1,0 +1,32 @@
+---
+- name: installing packages
+  hosts: all
+  become: true
+  gather_facts: no
+  tasks:
+  - name: installing httpd redhat
+    yum:
+      name: httpd
+      state: installed
+  - name: install httpd on ubuntu
+    apt:
+      name: apache2
+      state: installed
+
+  - name: start apache services on ubuntu
+    service:
+      name: apache2
+      state: started
+
+  - name: starting httpd services
+    service:
+      name: httpd
+      state: started
+
+  - copy:
+      src: /home/ansadmin/playbooks/index.html
+      dest: /var/www/html 
+
+
+
+

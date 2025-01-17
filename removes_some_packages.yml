@@ -1,0 +1,12 @@
+---
+- name:  install multilple packages_otherway
+  hosts: all
+  become: true
+  gather_facts: yes
+
+  tasks: 
+  - name: unistall packages
+    yum : 
+      name: "['git', 'wget', 'tree', 'make','telnet', 'gzip']"
+      state: removed  
+

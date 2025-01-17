@@ -1,0 +1,10 @@
+# Playbook to create a user on linux
+---
+- name: creatin user
+  hosts: all
+  gather_facts: no
+  become: true
+  tasks:
+  - name: creating user Diangienda
+    user:
+      name: Diangienda

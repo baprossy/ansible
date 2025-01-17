@@ -1,0 +1,14 @@
+---
+- name: installing packages
+  hosts: all
+  become: true
+  gather_facts: no
+  tasks:
+
+    - name: installing packages
+      yum:
+       	name: httpd
+        state: installed
+          
+    - name: staring httpd services          
+

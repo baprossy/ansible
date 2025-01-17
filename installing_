@@ -1,0 +1,13 @@
+---
+- name: install npm package
+  hosts: all
+  gather_facts: no
+  become: true
+  
+
+  tasks:
+  - name: installing  package
+    yum: 
+      name: npm
+      state: installed
+    

@@ -1,0 +1,14 @@
+---
+- name: create files4 or directories
+  hosts: all
+  become: true
+  gather_facts: no
+
+  tasks:
+  - name: create one files4
+    file: 
+      path: /home/ansadmin/myfiles4
+      state: touch
+      mode: 0755
+      owner: ansadmin
+
