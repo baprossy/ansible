@@ -1,11 +1,21 @@
 ---
-- name: creating user
+- name: creating  user 
   hosts: all
   gather_facts: no
   become: true
+  vars: 
+    user_name: barakengera
+  
   tasks:
+  - name: creating user {{ user_name }}
+    user:
+      name: "{{ user_name }}"
 
-    - name: creating user Kimbangu
-      
-      user: 
-        name: Kimbangu
+  - name: create a directory
+    file:
+      path: /opt/{{user_name}}_temp_dir
+      state: directory
+      owner: " {{ user_name }}"
+      group: "{{user_name}}"
+      mode: 0755
+
