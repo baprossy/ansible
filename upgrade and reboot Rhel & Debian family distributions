@@ -1,0 +1,74 @@
+upgrade and reboot RHel & Debian family Linux ditributions
+
+- name: Upgrade and Reboot RHEL & Debian family Linux distros
+  hosts: <host1,host2,host3>  # replace with your actual hosts in the inventory file.
+  vars:
+    reboot_connect_timeout: 5
+    reboot_post_reboot_delay: 15
+    reboot_timeout: 600
+  tasks:
+    # Upgrade RHEL family OS packages
+    - name: Upgrade RHEL Family OS packages
+      ansible.builtin.yum:
+        name: '*'
+        state: latest
+      when:
+        - ansible_facts['distribution'] == "RedHat"
+        - ansible_facts['distribution_major_version'] == "7"
+
+    # Upgrade RHEL family OS packages
+    - name: Upgrade RHEL Family OS packages
+      ansible.builtin.yum:
+        name: '*'
+        state: latest
+      when:
+        - ansible_facts['distribution'] == "RedHat"
+        - ansible_facts['distribution_major_version'] == "8"
+
+    # Upgrade RHEL family OS packages
+    - name: Upgrade RHEL Family OS packages
+      ansible.builtin.yum:
+        name: '*'
+        state: latest
+      when:
+        - ansible_facts['distribution'] == "RedHat"
+        - ansible_facts['distribution_major_version'] == "9"
+
+    # Ubuntu Family upgrade
+    - name: Update repositories cache
+      apt:
+        update_cache: yes
+      when:
+        - ansible_facts['distribution'] == "Ubuntu"
+        - ansible_facts['distribution_major_version'] == "20"
+
+    - name: Update all packages to their latest version
+      apt:
+        name: "*"
+        state: latest
+      when:
+        - ansible_facts['distribution'] == "Ubuntu"
+        - ansible_facts['distribution_major_version'] == "22"
+
+    # Debian Family upgrade
+    - name: Upgrade the OS (apt-get dist-upgrade)
+      apt:
+        upgrade: dist
+      when:
+        - ansible_facts['distribution'] == "Debian"
+        - ansible_facts['distribution_major_version'] == "11"
+
+    - name: Upgrade the OS (apt-get dist-upgrade)
+      apt:
+        upgrade: dist
+      when:
+        - ansible_facts['distribution'] == "Debian"
+        - ansible_facts['distribution_major_version'] == "12"
+
+    # Reboot after upgrade
+    - name: Reboot host
+      reboot:
+        connect_timeout: ""
+        post_reboot_delay: ""
+        reboot_timeout: ""
+ 
